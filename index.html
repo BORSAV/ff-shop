@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Free Fire Diamond Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f6f7fb;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 460px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 14px #ddd;
+            padding: 32px;
+        }
+        label, .desc {
+            font-size: 12px;
+            color: #222;
+        }
+        .small-input {
+            font-size: 12px;
+            padding: 8px;
+            width: 90%;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+        }
+        .btn {
+            background: #FF5B5B;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        .shop-table {
+            width: 100%;
+            margin-top: 16px;
+            border-collapse: collapse;
+        }
+        .shop-table th, .shop-table td {
+            border: 1px solid #eee;
+            padding: 10px;
+            font-size: 13px;
+        }
+        .shop-table th {
+            background: #fafafa;
+            font-weight: bold;
+        }
+        del {
+            color: #a8a8a8;
+            margin-right: 6px;
+        }
+        .diamond-img {
+            width: 32px;
+            height: 32px;
+            vertical-align: middle;
+            margin-right: 7px;
+            background: url('diamond.png') no-repeat center/cover;
+            display: inline-block;
+        }
+        .qr-container {
+            display: none;
+            text-align: center;
+            margin: 20px 0 0 0;
+        }
+        .qr-img {
+            width: 120px;
+            height: 120px;
+            background: url('qr.png') no-repeat center/cover;
+            margin: 0 auto 14px auto;
+            display: block;
+        }
+        .timer {
+            font-size: 18px;
+            color: #FF5B5B;
+            margin-bottom: 16px;
+        }
+        .utr-section {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .notice {
+            color: #1a8800;
+            font-size: 15px;
+            font-weight: 500;
+            text-align: center;
+            margin-top: 20px;
+        }
+        /* Popup styling */
+        .popup {
+            display: none;
+            position: fixed;
+            z-index: 1050;
+            left: 0; top: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.45);
+            align-items: center;
+            justify-content: center;
+        }
+        .popup-content {
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            min-width: 300px;
+        }
+        .popup-content .diamond-img {
+            width: 56px; height: 56px;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div id="login-page" class="container">
+        <h2 style="font-size: 22px; color:#FF5B5B;">Enter Free Fire Max UID</h2>
+        <label for="uid">UID</label>
+        <input id="uid" class="small-input" placeholder="Enter your Free Fire Max UID" maxlength="9">
+        <div id="uid-err" style="color:red;margin:8px 0;font-size:12px;"></div>
+        <button class="btn" onclick="login()">Submit</button>
+    </div>
+
+    <div id="shop-page" class="container" style="display:none;">
+        <h2 style="font-size: 22px; color:#333;">Diamond Shop</h2>
+        <table class="shop-table">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Diamond Pack</th>
+                <th>MRP</th>
+                <th>Discount</th>
+                <th>Our Price</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="diamond-img"></span></td>
+                    <td>250</td>
+                    <td><del>₹240</del></td>
+                    <td>30%</td>
+                    <td><span style="color:#1a8800;">₹168</span></td>
+                    <td><button class="btn" onclick="buyPack(168)">Buy</button></td>
+                </tr>
+                <tr>
+                    <td><span class="diamond-img"></span></td>
+                    <td>310</td>
+                    <td><del>₹310</del></td>
+                    <td>30%</td>
+                    <td><span style="color:#1a8800;">₹217</span></td>
+                    <td><button class="btn" onclick="buyPack(217)">Buy</button></td>
+                </tr>
+                <tr>
+                    <td><span class="diamond-img"></span></td>
+                    <td>450</td>
+                    <td><del>₹360</del></td>
+                    <td>30%</td>
+                    <td><span style="color:#1a8800;">₹252</span></td>
+                    <td><button class="btn" onclick="buyPack(252)">Buy</button></td>
+                </tr>
+                <tr>
+                    <td><span class="diamond-img"></span></td>
+                    <td>520</td>
+                    <td><del>₹400</del></td>
+                    <td>30%</td>
+                    <td><span style="color:#1a8800;">₹280</span></td>
+                    <td><button class="btn" onclick="buyPack(280)">Buy</button></td>
+                </tr>
+                <tr>
+                    <td><span class="diamond-img"></span></td>
+                    <td>650</td>
+                    <td><del>₹520</del></td>
+                    <td>40%</td>
+                    <td><span style="color:#1a8800;">₹312</span></td>
+                    <td><button class="btn" onclick="buyPack(312)">Buy</button></td>
+                </tr>
+                <tr>
+                    <td><span class="diamond-img"></span></td>
+                    <td>850</td>
+                    <td><del>₹680</del></td>
+                    <td>40%</td>
+                    <td><span style="color:#1a8800;">₹408</span></td>
+                    <td><button class="btn" onclick="buyPack(408)">Buy</button></td>
+                </tr>
+                <tr>
+                    <td><span class="diamond-img"></span></td>
+                    <td>1060</td>
+                    <td><del>₹800</del></td>
+                    <td>40%</td>
+                    <td><span style="color:#1a8800;">₹480</span></td>
+                    <td><button class="btn" onclick="buyPack(480)">Buy</button></td>
+                </tr>
+                <tr>
+                    <td><span class="diamond-img"></span></td>
+                    <td>1600</td>
+                    <td><del>₹1600</del></td>
+                    <td>40%</td>
+                    <td><span style="color:#1a8800;">₹960</span></td>
+                    <td><button class="btn" onclick="buyPack(960)">Buy</button></td>
+                </tr>
+                <tr>
+                    <td><span class="diamond-img"></span></td>
+                    <td>2180</td>
+                    <td><del>₹1600</del></td>
+                    <td>40%</td>
+                    <td><span style="color:#1a8800;">₹960</span></td>
+                    <td><button class="btn" onclick="buyPack(960)">Buy</button></td>
+                </tr>
+                <tr>
+                    <td><span class="diamond-img"></span></td>
+                    <td>5600</td>
+                    <td><del>₹4000</del></td>
+                    <td>40%</td>
+                    <td><span style="color:#1a8800;">₹2400</span></td>
+                    <td><button class="btn" onclick="buyPack(2400)">Buy</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="qr-section" class="container qr-container">
+        <div class="timer" id="timer"></div>
+        <span class="diamond-img"></span>
+        <div class="desc" style="margin-top:10px;">Scan & Pay (QR)</div>
+        <div class="qr-img"></div>
+        <div class="utr-section" id="utr-section">
+            <label for="utr">Enter UTR:</label><br>
+            <input id="utr" class="small-input" style="width:70%;margin-top:6px;"><br>
+            <button class="btn" onclick="verifyPayment()">Submit</button>
+        </div>
+        <div id="notice" class="notice"></div>
+    </div>
+
+    <!-- Promotion Popup -->
+    <div id="promo-popup" class="popup">
+        <div class="popup-content">
+            <span class="diamond-img"></span>
+            <h3 style="color:#FF5B5B; margin-top:4px;">Win 500 Diamonds Free!</h3>
+            <p>Share this with 5 people on WhatsApp to participate.</p>
+            <button class="btn" onclick="shareWhatsapp()">Share Now</button>
+            <div id="bonus-msg" style="color:#1a8800;margin-top:12px;"></div>
+        </div>
+    </div>
+
+    <script>
+        function login() {
+            var uid = document.getElementById('uid').value;
+            // UID check: must be 7-9 digits for Free Fire Max
+            if (!/^\d{7,9}$/.test(uid)) {
+                document.getElementById('uid-err').innerText = "Please enter a valid UID.";
+                return;
+            }
+            document.getElementById('uid-err').innerText = "";
+            document.getElementById('login-page').style.display = "none";
+            document.getElementById('shop-page').style.display = "block";
+            // Show promo popup
+            setTimeout(function() {
+                document.getElementById('promo-popup').style.display = "flex";
+            }, 500);
+        }
+
+        // One-click sharing simulation
+        function shareWhatsapp() {
+            // Optionally, use window.open with WhatsApp share URL
+            // window.open('https://wa.me/?text=Free%20Fire%20Diamonds%20Shop!%20Grab%20discounts!%20https://yourshopurl.com','_blank');
+            setTimeout(function() {
+                document.getElementById('bonus-msg').innerText = "Better luck next time! Thanks for sharing.";
+                setTimeout(function() {
+                    document.getElementById('promo-popup').style.display = "none";
+                }, 1300);
+            }, 600);
+        }
+
+        // Buying logic
+        function buyPack(price) {
+            document.getElementById('shop-page').style.display = "none";
+            document.getElementById('qr-section').style.display = "block";
+            // Start timer
+            let timeLeft = 180;
+            document.getElementById('timer').innerText = "QR expires in 3:00";
+            var timerInterval = setInterval(function() {
+                timeLeft--;
+                var min = Math.floor(timeLeft/60), sec = timeLeft%60;
+                document.getElementById('timer').innerText = `QR expires in ${min}:${sec.toString().padStart(2,'0')}`;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById('timer').innerText = "QR expired!";
+                }
+            }, 1000);
+            // Show UTR section after QR
+            setTimeout(function() {
+                document.getElementById('utr-section').style.display = "block";
+            }, 2000);
+        }
+
+        // Payment verification
+        function verifyPayment() {
+            var utr = document.getElementById('utr').value;
+            if (utr.length < 8) {
+                document.getElementById('notice').innerText = "Enter a valid UTR number!";
+                return;
+            }
+            document.getElementById('notice').innerText = "Payment verifying, you will receive your diamonds within 10 minutes.";
+        }
+    </script>
+</body>
+</html>
